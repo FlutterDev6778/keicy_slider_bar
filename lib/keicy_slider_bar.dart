@@ -69,7 +69,7 @@ class KeicySlideBar extends StatelessWidget {
   final BoxShadow tooltipBoxShadow;
   final Widget leftPrefix;
   final Widget rightSuffix;
-  final Function tooltipFormat;
+  final Function(String) tooltipFormat;
   final dynamic tooltipDirection;
   final double tooltipPositionOffset;
   final bool selectByTap;
@@ -143,11 +143,11 @@ class KeicySlideBar extends StatelessWidget {
                                 child: (tooltipFormat != null)
                                     ? (KeicySlideBarProvider.values.length == 2)
                                         ? Text(
-                                            "${(tooltipFormat(KeicySlideBarProvider.values[0])).toString()} - ${(tooltipFormat(KeicySlideBarProvider.values[1])).toString()}",
+                                            "${(tooltipFormat(KeicySlideBarProvider.values[0].toString())).toString()} - ${(tooltipFormat(KeicySlideBarProvider.values[1].toString())).toString()}",
                                             style: tooltipTextStyle,
                                           )
                                         : Text(
-                                            "${(tooltipFormat(KeicySlideBarProvider.values[0])).toString()}",
+                                            "${(tooltipFormat(KeicySlideBarProvider.values[0].toString())).toString()}",
                                             style: tooltipTextStyle,
                                           )
                                     : (KeicySlideBarProvider.values.length == 2)
