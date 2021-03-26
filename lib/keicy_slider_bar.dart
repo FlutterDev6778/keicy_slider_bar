@@ -9,7 +9,6 @@ class KeicySlideBar extends StatelessWidget {
   KeicySlideBar({
     Key key,
     @required this.width,
-    @required this.height,
     this.min = 0,
     this.max = 100,
     this.values = const [50],
@@ -50,7 +49,6 @@ class KeicySlideBar extends StatelessWidget {
     this.rtl = false,
   }) : super(key: key);
   final double width;
-  double height;
   final double min;
   final double max;
   List<double> values;
@@ -119,7 +117,6 @@ class KeicySlideBar extends StatelessWidget {
       child: Consumer<KeicySlideBarProvider>(builder: (context, keicySlideBarProvider, _) {
         return Container(
           width: width,
-          height: height,
           alignment: Alignment.center,
           child: Column(
             children: <Widget>[
