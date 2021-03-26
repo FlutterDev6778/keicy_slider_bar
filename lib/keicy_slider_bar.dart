@@ -19,9 +19,10 @@ class KeicySlideBar extends StatelessWidget {
     this.activeTrackBarHeight = 3,
     this.inactiveDisabledTrackBarColor = Colors.grey,
     this.activeDisabledTrackBarColor = Colors.blue,
+    this.trackBarBorderRadius = 0,
+    this.inActiveTrackBarBorderColor = Colors.grey,
+    this.activeTrackBarBorderColor = Colors.transparent,
     this.activeTrackBarDraggable = true,
-    this.sliderBorderRadius = 0,
-    this.sliderBorderColor = Colors.grey,
     this.disabled = false,
     this.tooltipDisabled = false,
     this.alwaysShowTooltip = false,
@@ -58,8 +59,9 @@ class KeicySlideBar extends StatelessWidget {
   final Color inactiveDisabledTrackBarColor;
   final Color activeDisabledTrackBarColor;
   final bool activeTrackBarDraggable;
-  final double sliderBorderRadius;
-  final Color sliderBorderColor;
+  final double trackBarBorderRadius;
+  final Color inActiveTrackBarBorderColor;
+  final Color activeTrackBarBorderColor;
   final bool disabled;
   final bool tooltipDisabled;
   final bool alwaysShowTooltip;
@@ -204,13 +206,14 @@ class KeicySlideBar extends StatelessWidget {
                   activeDisabledTrackBarColor: activeDisabledTrackBarColor,
                   activeTrackBarDraggable: activeTrackBarDraggable,
                   inactiveTrackBar: BoxDecoration(
-                    borderRadius: BorderRadius.circular(sliderBorderRadius),
+                    borderRadius: BorderRadius.circular(trackBarBorderRadius),
                     color: inactiveDisabledTrackBarColor,
-                    border: Border.all(width: 1, color: sliderBorderColor),
+                    border: Border.all(width: 1, color: inActiveTrackBarBorderColor),
                   ),
                   activeTrackBar: BoxDecoration(
                     color: activeDisabledTrackBarColor,
-                    borderRadius: BorderRadius.circular(sliderBorderRadius),
+                    borderRadius: BorderRadius.circular(trackBarBorderRadius),
+                    border: Border.all(width: 1, color: activeTrackBarBorderColor),
                   ),
                 ),
                 tooltip: FlutterSliderTooltip(
