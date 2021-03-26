@@ -13,6 +13,8 @@ class KeicySlideBar extends StatelessWidget {
     this.min = 0,
     this.max = 100,
     this.values = const [50],
+    this.handlerWidth,
+    this.handlerHeight,
     this.handlerWidget = const Icon(Icons.chevron_right, size: 25),
     this.rightHandlerWidget = const Icon(Icons.chevron_left, size: 25),
     this.inactiveTrackBarHeight = 3,
@@ -52,6 +54,8 @@ class KeicySlideBar extends StatelessWidget {
   final double min;
   final double max;
   List<double> values;
+  final double handlerWidth;
+  final double handlerHeight;
   final Widget handlerWidget;
   final Widget rightHandlerWidget;
   final double inactiveTrackBarHeight;
@@ -194,6 +198,8 @@ class KeicySlideBar extends StatelessWidget {
                 },
                 disabled: disabled,
                 onDragCompleted: onDragCompleted,
+                handlerWidth: handlerWidth,
+                handlerHeight: handlerHeight,
                 handler: FlutterSliderHandler(child: handlerWidget),
                 rightHandler: FlutterSliderHandler(child: rightHandlerWidget),
                 selectByTap: selectByTap,
