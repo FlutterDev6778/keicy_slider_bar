@@ -110,7 +110,7 @@ class KeicySlideBar extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => KeicySlideBarProvider(values)),
         ChangeNotifierProvider(create: (_) => CenterTooltipPositionProvider()),
       ],
-      child: Consumer<KeicySlideBarProvider>(builder: (context, KeicySlideBarProvider, _) {
+      child: Consumer<KeicySlideBarProvider>(builder: (context, keicySlideBarProvider, _) {
         return Container(
           width: width,
           height: height,
@@ -120,7 +120,7 @@ class KeicySlideBar extends StatelessWidget {
               (enableCenterTooltip)
                   ? Consumer<CenterTooltipPositionProvider>(
                       builder: (context, centerTooltipPositionProvider, _) {
-                        moveCenterTooltip(context, KeicySlideBarProvider, centerTooltipPositionProvider);
+                        moveCenterTooltip(context, keicySlideBarProvider, centerTooltipPositionProvider);
                         EdgeInsetsGeometry padding;
                         if (centerTooltipPositionProvider.positionX != null && rtl) {
                           padding = EdgeInsets.only(right: centerTooltipPositionProvider.positionX);
@@ -141,22 +141,22 @@ class KeicySlideBar extends StatelessWidget {
                                   boxShadow: [tooltipBoxShadow],
                                 ),
                                 child: (tooltipFormat != null)
-                                    ? (KeicySlideBarProvider.values.length == 2)
+                                    ? (keicySlideBarProvider.values.length == 2)
                                         ? Text(
-                                            "${(tooltipFormat(KeicySlideBarProvider.values[0].toString())).toString()} - ${(tooltipFormat(KeicySlideBarProvider.values[1].toString())).toString()}",
+                                            "${(tooltipFormat(keicySlideBarProvider.values[0].toString())).toString()} - ${(tooltipFormat(keicySlideBarProvider.values[1].toString())).toString()}",
                                             style: tooltipTextStyle,
                                           )
                                         : Text(
-                                            "${(tooltipFormat(KeicySlideBarProvider.values[0].toString())).toString()}",
+                                            "${(tooltipFormat(keicySlideBarProvider.values[0].toString())).toString()}",
                                             style: tooltipTextStyle,
                                           )
-                                    : (KeicySlideBarProvider.values.length == 2)
+                                    : (keicySlideBarProvider.values.length == 2)
                                         ? Text(
-                                            "${KeicySlideBarProvider.values[0].toString()} - ${KeicySlideBarProvider.values[1].toString()}",
+                                            "${keicySlideBarProvider.values[0].toString()} - ${keicySlideBarProvider.values[1].toString()}",
                                             style: tooltipTextStyle,
                                           )
                                         : Text(
-                                            "${KeicySlideBarProvider.values[0].toString()}",
+                                            "${keicySlideBarProvider.values[0].toString()}",
                                             style: tooltipTextStyle,
                                           ),
                               ),
@@ -182,13 +182,13 @@ class KeicySlideBar extends StatelessWidget {
                   : SizedBox(),
               FlutterSlider(
                 key: _sliderGlobalKey,
-                values: KeicySlideBarProvider.values,
-                rangeSlider: (KeicySlideBarProvider.values.length == 2) ? true : false,
+                values: keicySlideBarProvider.values,
+                rangeSlider: (keicySlideBarProvider.values.length == 2) ? true : false,
                 rtl: rtl,
                 max: max,
                 min: min,
                 onDragging: (handlerIndex, lowerValue, upperValue) {
-                  KeicySlideBarProvider.setValues([lowerValue, upperValue]);
+                  keicySlideBarProvider.setValues([lowerValue, upperValue]);
                 },
                 disabled: disabled,
                 onDragCompleted: onDragCompleted,
