@@ -39,6 +39,8 @@ class KeicySlideBar extends StatelessWidget {
     this.leftPrefix,
     this.rightSuffix,
     this.tooltipFormat,
+    this.leftTooltipFormat,
+    this.rightTooltipFormat,
     this.tooltipDirection = FlutterSliderTooltipDirection.top,
     this.tooltipPositionOffset = -10,
     this.selectByTap = true,
@@ -74,6 +76,8 @@ class KeicySlideBar extends StatelessWidget {
   final Widget leftPrefix;
   final Widget rightSuffix;
   final Function(String) tooltipFormat;
+  Function(String) leftTooltipFormat;
+  Function(String) rightTooltipFormat;
   final dynamic tooltipDirection;
   final double tooltipPositionOffset;
   final bool selectByTap;
@@ -115,6 +119,33 @@ class KeicySlideBar extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CenterTooltipPositionProvider()),
       ],
       child: Consumer<KeicySlideBarProvider>(builder: (context, keicySlideBarProvider, _) {
+        leftTooltipFormat = leftTooltipFormat ?? tooltipFormat;
+        rightTooltipFormat = rightTooltipFormat ?? tooltipFormat;
+
+        String tooltipString = "";
+
+        if (keicySlideBarProvider.values.length == 2) {
+          if (leftTooltipFormat != null) {
+            tooltipString += (leftTooltipFormat(keicySlideBarProvider.values[0].toString())).toString();
+          } else {
+            tooltipString += keicySlideBarProvider.values[0].toString();
+          }
+
+          tooltipString += " - ";
+
+          if (rightTooltipFormat != null) {
+            tooltipString += (rightTooltipFormat(keicySlideBarProvider.values[1].toString())).toString();
+          } else {
+            tooltipString += keicySlideBarProvider.values[1].toString();
+          }
+        } else {
+          if (tooltipFormat != null) {
+            tooltipString += (tooltipFormat(keicySlideBarProvider.values[0].toString())).toString();
+          } else {
+            tooltipString += keicySlideBarProvider.values[0].toString();
+          }
+        }
+
         return Container(
           width: width,
           alignment: Alignment.center,
@@ -143,25 +174,10 @@ class KeicySlideBar extends StatelessWidget {
                                   color: tooltipColor,
                                   boxShadow: [tooltipBoxShadow],
                                 ),
-                                child: (tooltipFormat != null)
-                                    ? (keicySlideBarProvider.values.length == 2)
-                                        ? Text(
-                                            "${(tooltipFormat(keicySlideBarProvider.values[0].toString())).toString()} - ${(tooltipFormat(keicySlideBarProvider.values[1].toString())).toString()}",
-                                            style: tooltipTextStyle,
-                                          )
-                                        : Text(
-                                            "${(tooltipFormat(keicySlideBarProvider.values[0].toString())).toString()}",
-                                            style: tooltipTextStyle,
-                                          )
-                                    : (keicySlideBarProvider.values.length == 2)
-                                        ? Text(
-                                            "${keicySlideBarProvider.values[0].toString()} - ${keicySlideBarProvider.values[1].toString()}",
-                                            style: tooltipTextStyle,
-                                          )
-                                        : Text(
-                                            "${keicySlideBarProvider.values[0].toString()}",
-                                            style: tooltipTextStyle,
-                                          ),
+                                child: Text(
+                                  tooltipString,
+                                  style: tooltipTextStyle,
+                                ),
                               ),
                               Container(
                                 child: ClipShadow(
